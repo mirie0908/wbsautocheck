@@ -1,0 +1,31 @@
+2017/8/4(fri)
+wbsautocheck開始。
+mkdir wbsautocheck
+cd wbsautocheck
+lein new app wbsautocheck -> Failした。ネットワークの疎通関係でなにか依存モジュール等がもってこれなかった？
+やりなおし
+lein new wbsautocheck -> 成功。
+wbsautocheck/project.cljを編集。Excel読むためdocjureを追加。
+
+プログラムの流れ：
+１）Excelを読み込む
+２）今日＞予定開始かつ実績開始が未記入のもの（＝着手遅れ）は対象
+３）今日＞予定完了かつ実績完了が未記入のもの（＝完了遅れ）は対象
+４）対象行を,clojureデーター＞jsonデータに変換してファイル書き出し
+
+ciderを起動：M-x cider-jack-in
+cider REPLをテスト：
+１）core.cljの画面（バッファ）に移動。(C-x b とカーソルキーで該当バッファを選択）
+２）評価する各行の行末の)の右にカーソルを移動し、C-c C-e
+３）REPLの画面（バッファ）に移動
+４）(wbsautocheck.core/foo "masa")とキーインしEnter
+５）結果が表示される。
+
+2017/8/8(tue)
+doubleの変数をintegerとしてprintf
+(def ckou1 2.0)
+(printf "ckou1=%d" (int ckou1)) ;; intでキャストしとかないと"doubleに変換エラのexception出る。
+
+
+
+
