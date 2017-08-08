@@ -2,6 +2,7 @@
 
 (use 'dk.ative.docjure.spreadsheet) ; docjure
 
+
 ;;################################
 ;;WBS Excelを逐次読み込み処理
 ;;################################
@@ -27,8 +28,18 @@
       (if (not= (:kou2 r1) nil) (def ckou2 (:kou2 r1)))
       (if (not= (:kou3 r1) nil) (def ckou3 (:kou3 r1)))
       (if (not= (:kou4 r1) nil) (def ckou4 (:kou4 r1)))
-      (if (and (not= (:yo-st r1) nil) (not= (:yo-en r1) nil))
-        (printf "%d.%d.%d.%d: %s yo-st=%s yo-en=%s tantou=%s\n" (int ckou1) (int ckou2) (int ckou3) (int ckou4) (str (:taskname1 r1) (:taskname2 r1) (:taskname3 r1) (:taskname4 r1)) (:yo-st r1) (:yo-en r1) (:tantou r1))
+      (if (and (not= (:yo-st r1) nil) (not= (:yo-en r1) nil)
+               (= (.toString (type (:yo-st r1))) "class java.util.Date")
+               (= (.toString (type (:yo-en r1))) "class java.util.Date"))
+        (printf "%d.%d.%d.%d: %s yo-st=%s yo-en=%s tantou=%s\n"
+                (int ckou1)
+                (int ckou2)
+                (int ckou3)
+                (int ckou4)
+                (str (:taskname1 r1) (:taskname2 r1) (:taskname3 r1) (:taskname4 r1))
+                (.format (java.text.SimpleDateFormat. "yyyy/MM/dd") (:yo-st r1))
+                (.format (java.text.SimpleDateFormat. "yyyy/MM/dd") (:yo-en r1))
+                (:tantou r1))
         )
         ;;(printf "kou1:%s kou2:%s kou3:%s taskname:%s\n" (:kou1 r1) (:kou2 r1) (:kou3 r1) (:taskname2 r1))
       );;end-of-do

@@ -26,6 +26,14 @@ doubleの変数をintegerとしてprintf
 (def ckou1 2.0)
 (printf "ckou1=%d" (int ckou1)) ;; intでキャストしとかないと"doubleに変換エラのexception出る。
 
+Date&time のフォーマット整形
+https://www.tutorialspoint.com/clojure/clojure_date_and_time.htm
+(def date (.format (java.text.SimpleDateFormat. "MM/dd/yyyy") (new java.util.Date)))
+
+Date&timeの日付計算
+java.util.Date は単純なmethodしかない。
+コンストラクタ：1977/1/1epocからの経過ミリ秒を引数に任意のdateにセット
+メソッドは、２つのdateの比較程度（before(),after(), compareto()など）
 
 
 
